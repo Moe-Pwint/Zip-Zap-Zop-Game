@@ -14,20 +14,18 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
     5. Each level has different rules.
   - Select Level Button (Each level )
     1.  Level 0 Btn - Level 1 Rules:
-        Time limit for each tap: 5 seconds
-        Game time is 2 minute.
-        Gain minimum 21 scores to win the level.
+        Game time is 1 minute.
+        Gain 21 scores to win the level. How fast can you score?
 
             - General Gameplay Rules:
 
                 Tap the cards "Zip" "Zap" "Zop" in a row quickly without making a mistake.
-                Beat your own score!
+                Beat your own time!
 
             - Play Level 0 Btn.
 
     2.  Level 1 Btn - Level 1 Rules:
-        Time limit for each tap: 3 seconds
-        Game time is 90 secs.
+        Game time is 60 secs.
         Gain minimum 30 scores to win the level.
 
             - General Gameplay Rules:
@@ -39,8 +37,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
 
     3.  Level 2 Btn
         - Level 2 Rules:
-          Time limit for each tap: 2 seconds
-          Game time is 1 minute.
+          Game time is 40 seconds.
           Gain minimum 30 scores to win the level.
           - General Gameplay Rules:
 
@@ -51,8 +48,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
 
     4.  Level 3 Btn
         - Level 3 Rules:
-          Time limit for each tap: 2 seconds
-          Game time is 1 minute.
+          Game time is 40 seconds.
           Gain minimum 30 scores to win the level.
           Watch out for an additional card with a typo!
           - General Gameplay Rules:
@@ -64,8 +60,8 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
     5.  Level 5 Btn
         - Level 5 Rules:
           Time limit for each tap: 1 seconds
-          Game time is 1 minute.
-          Gain minimum 50 scores to win the level.
+          Game time is 25 seconds.
+          Gain minimum 30 scores to win the level.
           - General Gameplay Rules:
 
             Tap the cards "Zip" "Zap" "Zop" in a row quickly without making a mistake.
@@ -75,8 +71,8 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
     6.  Level 6 Btn
         - Level 6 Rules:
           Time limit for each tap: 1 second
-          Game time is 1 minute.
-          Gain minimum 50 scores to win the level.
+          Game time is 25 seconds.
+          Gain minimum 30 scores to win the level.
           Reverse pattern: Now it is "Zop", "Zap", "Zip"!
           - General Gameplay Rules:
 
@@ -84,18 +80,26 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
             Beat your own score!
             - Play Level 6 Btn.
 
-- UI for every level
+- UI for level 0
   1. menu icon
      - Back to Main Screen
      - Level Description
      - Start over
      - Profile (stats for each level, others)
-  2. menu icon
-  3. highest score
-  4. current score
-  5. Game time countdown
-  6. timer countdown
-  7. cards
+  2. current score
+  3. Game time countdown
+  4. best time
+  5. cards
+  - UI for level 1 to 6
+  1. menu icon
+     - Back to Main Screen
+     - Level Description
+     - Start over
+     - Profile (stats for each level, others)
+  2. highest score
+  3. current score
+  4. Game time countdown
+  5. cards
 
 - Game Functions for level 0
 

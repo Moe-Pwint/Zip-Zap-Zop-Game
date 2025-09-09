@@ -7,21 +7,21 @@ body {
   box-sizing: border-box;
 }
 
-.menuBtn {
-  border: 2px solid rgb(10, 71, 139);
-}
-
 .topContainer {
   display: flex;
-  align-items: center;
+  align-items: top;
 }
 
 .menuContainer {
   width: 200px;
 }
 
+.menuBtn {
+  border: 2px solid rgb(10, 71, 139);
+}
+
 .scoreContainer {
-  /* margin-left: auto; */
+  margin-bottom: 1em;
   width: 200px;
   border: 1px solid black;
   padding-left: 1em;
@@ -30,6 +30,7 @@ body {
 
 .gameTimeContainer {
   margin: auto;
+  margin-top: 0;
   width: 200px;
   height: 70px;
   border: 1px solid black;

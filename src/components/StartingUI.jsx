@@ -1,27 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-// import React, { useState } from 'react'
 import './StartingUI.css'
 
-export default function StartingUI({
-  currentScore,
-  bestScore,
-  gameTimer,
-  roundTimer,
-}) {
+export default function StartingUI({ gameTimer, score, bestTime }) {
   return (
     <>
       <div className="topContainer">
         <MenuUI />
         <GameTimeUI gameTimer={gameTimer} />
-        <ScoreUI currentScore={currentScore} bestScore={bestScore} />
-      </div>
-
-      <RoundTimeUI roundTimer={roundTimer} />
-      <div className="cardsContainer">
-        <Zip />
-        <Zap />
-        <Zop />
+        <div>
+          <ScoreUI score={score} />
+          <BestTimeUI bestTime={bestTime} />
+        </div>
       </div>
     </>
   )
@@ -35,15 +25,6 @@ function MenuUI() {
   )
 }
 
-function ScoreUI({ currentScore, bestScore }) {
-  return (
-    <div className="scoreContainer">
-      <p>Current score: {currentScore}</p>
-      <p>Best score: {bestScore}</p>
-    </div>
-  )
-}
-
 function GameTimeUI({ gameTimer }) {
   return (
     <div className="gameTimeContainer">
@@ -52,34 +33,18 @@ function GameTimeUI({ gameTimer }) {
   )
 }
 
-function RoundTimeUI({ roundTimer }) {
+function ScoreUI({ score }) {
   return (
-    <div className="roundTimeContainer">
-      <p>{roundTimer}</p>
+    <div className="scoreContainer">
+      <p>Score: {score}</p>
     </div>
   )
 }
 
-function Zip() {
+function BestTimeUI({ bestTime }) {
   return (
-    <button className="zipCard card">
-      <p>ZIP</p>
-    </button>
-  )
-}
-
-function Zap() {
-  return (
-    <button className="zapCard card">
-      <p>ZAP</p>
-    </button>
-  )
-}
-
-function Zop() {
-  return (
-    <button className="zopCard card">
-      <p>ZOP</p>
-    </button>
+    <div className="scoreContainer">
+      <p>Best Time: {bestTime}</p>
+    </div>
   )
 }
