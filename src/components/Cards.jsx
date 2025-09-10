@@ -9,12 +9,20 @@ export default function Cards({ handleFalseCard, incrementScore }) {
     { id: 'zop' },
   ])
 
+  function handleShuffleArray(array) {
+    console.log(array)
+    const arrCopy = [...array]
+    shuffleArray(arrCopy)
+    console.log(arrCopy)
+    setArray(arrCopy)
+  }
+
   // const [zipState, setZipState] = useState(true)
   // const [zapState, setZapState] = useState(false)
   // const [zopState, setZopState] = useState(false)
 
   return (
-    <div className="cardsContainer">
+    <div onClick={() => handleShuffleArray(array)} className="cardsContainer">
       <CreatingCards array={array} />
     </div>
   )
@@ -53,8 +61,8 @@ function CreatingCards({ array }) {
   //   setZipState(true)
   //   incrementScore()
   // }
-
-  const arr = array.map((i) => (
+  const arrCopy = array.slice()
+  const arr = arrCopy.map((i) => (
     <button key={i.id} className={`card ${i}`}>
       <p>{i.id}</p>
     </button>
@@ -98,3 +106,12 @@ function CreatingCards({ array }) {
 //     array[j] = temp
 //   }
 // }
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
