@@ -3,75 +3,92 @@ import { useState, React } from 'react'
 import './StartingUI.css'
 
 export default function Cards({ handleFalseCard, incrementScore }) {
-  const [zipState, setZipState] = useState(true)
-  const [zapState, setZapState] = useState(false)
-  const [zopState, setZopState] = useState(false)
+  const [array, setArray] = useState([
+    { id: 'zip' },
+    { id: 'zap' },
+    { id: 'zop' },
+  ])
 
-  function handleZipClick() {
-    if (zipState === false) {
-      handleFalseCard()
-      return
-    }
-    console.log(zipState, zapState, zopState)
-    setZipState(false)
-    setZapState(true)
-    incrementScore()
-  }
-
-  function handleZapClick() {
-    if (zapState === false) {
-      handleFalseCard()
-      return
-    }
-    console.log(zipState, zapState, zopState)
-    setZapState(false)
-    setZopState(true)
-    incrementScore()
-  }
-
-  function handleZopClick() {
-    if (zopState === false) {
-      handleFalseCard()
-      return
-    }
-    console.log(zipState, zapState, zopState)
-    setZopState(false)
-    setZipState(true)
-    incrementScore()
-  }
+  // const [zipState, setZipState] = useState(true)
+  // const [zapState, setZapState] = useState(false)
+  // const [zopState, setZopState] = useState(false)
 
   return (
     <div className="cardsContainer">
-      <Zip handleZipClick={handleZipClick} />
-      <Zap handleZapClick={handleZapClick} />
-      <Zop handleZopClick={handleZopClick} />
+      <CreatingCards array={array} />
     </div>
   )
 }
 
-function Zip({ handleZipClick }) {
-  return (
-    <button className="card" onClick={handleZipClick}>
-      <p>ZIP</p>
+function CreatingCards({ array }) {
+  // function handleZipClick() {
+  //   if (zipState === false) {
+  //     handleFalseCard()
+  //     return
+  //   }
+  //   console.log(zipState, zapState, zopState)
+  //   setZipState(false)
+  //   setZapState(true)
+  //   incrementScore()
+  // }
+
+  // function handleZapClick() {
+  //   if (zapState === false) {
+  //     handleFalseCard()
+  //     return
+  //   }
+  //   console.log(zipState, zapState, zopState)
+  //   setZapState(false)
+  //   setZopState(true)
+  //   incrementScore()
+  // }
+
+  // function handleZopClick() {
+  //   if (zopState === false) {
+  //     handleFalseCard()
+  //     return
+  //   }
+  //   console.log(zipState, zapState, zopState)
+  //   setZopState(false)
+  //   setZipState(true)
+  //   incrementScore()
+  // }
+
+  const arr = array.map((i) => (
+    <button key={i.id} className={`card ${i}`}>
+      <p>{i.id}</p>
     </button>
-  )
+  ))
+  return <>{arr}</>
 }
 
-function Zap({ handleZapClick }) {
-  return (
-    <button className="card" onClick={handleZapClick}>
-      <p>ZAP</p>
-    </button>
-  )
-}
+// const zip = {id: 'zip',
+//   onClick: 'handleZipClick'
+// }
 
-function Zop({ handleZopClick }) {
-  return (
-    <button className="card" onClick={handleZopClick}>
-      <p>ZOP</p>
-    </button>
-  )
-}
+// function Zip() {
+//   return (
+//     <button className="card">
+//       <p>ZIP</p>
+//     </button>
+//   )
+// }
+
+// function Zap() {
+//   return (
+//     <button className="card">
+//       <p>ZAP</p>
+//     </button>
+//   )
+// }
+
+// function Zop() {
+//   return (
+//     <button className="card">
+//       <p>ZOP</p>
+//     </button>
+//   )
+// }
 
 // function shuffleArray(array) {
 //   for (var i = array.length - 1; i > 0; i--) {
