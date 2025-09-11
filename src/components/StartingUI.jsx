@@ -28,7 +28,7 @@ function MenuUI() {
 function GameTimeUI({ gameTimer }) {
   return (
     <div className="gameTimeContainer">
-      <p>Game ends in: {gameTimer}</p>
+      <p>Game ends in: {gameTimer} seconds</p>
     </div>
   )
 }
@@ -44,7 +44,7 @@ function ScoreUI({ score }) {
 function BestTimeUI({ bestTime }) {
   return (
     <div className="scoreContainer">
-      <p>Best Time: {bestTime}</p>
+      <p>Best Time: {bestTime} seconds</p>
     </div>
   )
 }

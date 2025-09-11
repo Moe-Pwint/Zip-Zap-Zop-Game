@@ -2,23 +2,26 @@
 import { useState, React } from 'react'
 import './StartingUI.css'
 
-export default function Cards({ handleFalseCard, incrementScore }) {
-  const [array, setArray] = useState([
-    { id: 'zip', correctCard: true },
-    { id: 'zap', correctCard: false },
-    { id: 'zop', correctCard: false },
-  ])
+export default function Cards({ gameLose, incrementScore, playing, stopGame }) {
+  const [array, setArray] = useState(
+    shuffleArray([
+      { id: 'zip', correctCard: true },
+      { id: 'zap', correctCard: false },
+      { id: 'zop', correctCard: false },
+    ]),
+  )
 
   function handleShuffleArray(array) {
     const arrCopy = [...array]
-    shuffleArray(arrCopy)
-    setArray(arrCopy)
+    const shuffled = shuffleArray(arrCopy)
+    setArray(shuffled)
   }
 
-  function checkFalseCard(e) {
+  function handleCardClicks(e) {
     if (e.target.classList.contains('false')) {
-      handleFalseCard()
-    } else {
+      gameLose()
+      stopGame()
+    } else if (e.target.classList.contains('true')) {
       incrementScore()
       const nextArr = getNextArray(e.target)
       handleShuffleArray(nextArr)
@@ -26,15 +29,19 @@ export default function Cards({ handleFalseCard, incrementScore }) {
   }
 
   return (
-    <div onClick={(e) => checkFalseCard(e)} className="cardsContainer">
-      <CreatingCards array={array} />
+    <div onClick={(e) => handleCardClicks(e)} className="cardsContainer">
+      <CreatingCards array={array} disable={!playing} />
     </div>
   )
 }
 
-function CreatingCards({ array }) {
+function CreatingCards({ array, disable }) {
   const arr = array.map((i) => (
-    <button key={i.id} className={`card ${i.id} ${i.correctCard}`}>
+    <button
+      key={i.id}
+      disabled={disable}
+      className={`card ${i.id} ${i.correctCard}`}
+    >
       <p>{i.id}</p>
     </button>
   ))
@@ -72,4 +79,5 @@ function shuffleArray(array) {
     array[i] = array[j]
     array[j] = temp
   }
+  return array
 }
