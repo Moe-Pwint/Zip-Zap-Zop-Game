@@ -1,85 +1,58 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-// import React, { useState } from 'react'
+import { useRef, useState } from 'react'
 import './StartingUI.css'
 
-export default function StartingUI({
-  currentScore,
-  bestScore,
-  gameTimer,
-  roundTimer,
-}) {
+export default function StartingUI() {
   return (
     <>
-      <div className="topContainer">
-        <MenuUI />
-        <GameTimeUI gameTimer={gameTimer} />
-        <ScoreUI currentScore={currentScore} bestScore={bestScore} />
-      </div>
-
-      <RoundTimeUI roundTimer={roundTimer} />
-      <div className="cardsContainer">
-        <Zip />
-        <Zap />
-        <Zop />
-      </div>
+      <Cards />
     </>
   )
 }
 
-function MenuUI() {
-  return (
-    <div className="menuContainer">
-      <button className="menuBtn">Menu</button>
-    </div>
-  )
-}
+function Cards() {
+  const arraySeq = useRef(['zip', 'zap', 'zop'])
+  const [correctCard, setCorrectCard] = useState('zip')
+  const nextArr = shuffle(arraySeq.current)
 
-function ScoreUI({ currentScore, bestScore }) {
-  return (
-    <div className="scoreContainer">
-      <p>Current score: {currentScore}</p>
-      <p>Best score: {bestScore}</p>
-    </div>
-  )
-}
+  function shuffle(array) {
+    const arrayCopy = [...array]
+    for (let i = arrayCopy.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let k = arrayCopy[i]
+      arrayCopy[i] = arrayCopy[j]
+      arrayCopy[j] = k
+    }
+    return arrayCopy
+  }
 
-function GameTimeUI({ gameTimer }) {
-  return (
-    <div className="gameTimeContainer">
-      <p>Game ends in: {gameTimer}</p>
-    </div>
-  )
-}
+  function assignCorrectCard() {
+    if (correctCard === 'zip') {
+      setCorrectCard('zap')
+    } else if (correctCard === 'zap') {
+      setCorrectCard('zop')
+    } else if (correctCard === 'zop') {
+      setCorrectCard('zip')
+    }
+  }
 
-function RoundTimeUI({ roundTimer }) {
-  return (
-    <div className="roundTimeContainer">
-      <p>{roundTimer}</p>
-    </div>
-  )
-}
+  function checkCardClick(e) {
+    if (e.target.classList.contains('false')) {
+      alert('Game Over')
+    } else {
+      assignCorrectCard()
+    }
+  }
 
-function Zip() {
-  return (
-    <button className="zipCard card">
-      <p>ZIP</p>
+  const cards = nextArr.map((card) => (
+    <button
+      key={card}
+      onClick={checkCardClick}
+      className={`${card} ${card === correctCard ? 'true' : 'false'}`}
+    >
+      {card}
     </button>
-  )
-}
-
-function Zap() {
-  return (
-    <button className="zapCard card">
-      <p>ZAP</p>
-    </button>
-  )
-}
-
-function Zop() {
-  return (
-    <button className="zopCard card">
-      <p>ZOP</p>
-    </button>
-  )
+  ))
+  return <>{cards}</>
 }
