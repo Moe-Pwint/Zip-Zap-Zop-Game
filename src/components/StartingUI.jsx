@@ -1,20 +1,48 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef, useState } from 'react'
 import './StartingUI.css'
 
 export default function StartingUI() {
+  const [score, setScore] = useState(0)
+  const [gameWin, setGameWin] = useState(null)
+
+  function handleScore() {
+    setScore((score) => score + 1)
+  }
+
+  useEffect(() => {
+    if (score === 6) {
+      setGameWin(true)
+    }
+  })
+
   return (
     <>
-      <Cards />
+      {gameWin && <WinAlert />}
+      <ScoreUI score={score} />
+      <Cards score={score} handleScore={handleScore} />
     </>
   )
 }
 
-function Cards() {
+function WinAlert() {
+  console.log('winAlert')
+  return (
+    <div>
+      <div>You Win!</div>
+    </div>
+  )
+}
+
+function ScoreUI({ score }) {
+  console.log('score updated')
+  return <div>Score: {score}</div>
+}
+
+function Cards({ score, handleScore }) {
   const arraySeq = useRef(['zip', 'zap', 'zop'])
   const [correctCard, setCorrectCard] = useState('zip')
-  const nextArr = shuffle(arraySeq.current)
 
   function shuffle(array) {
     const arrayCopy = [...array]
@@ -27,6 +55,21 @@ function Cards() {
     return arrayCopy
   }
 
+  function checkCardClick(e) {
+    if (e.target.classList.contains('false')) {
+      alert('Game Over')
+    } else {
+      handleScore()
+      createNextCards()
+    }
+  }
+
+  function createNextCards() {
+    if (score !== 6) {
+      assignCorrectCard()
+    }
+  }
+
   function assignCorrectCard() {
     if (correctCard === 'zip') {
       setCorrectCard('zap')
@@ -37,15 +80,7 @@ function Cards() {
     }
   }
 
-  function checkCardClick(e) {
-    if (e.target.classList.contains('false')) {
-      alert('Game Over')
-    } else {
-      assignCorrectCard()
-    }
-  }
-
-  const cards = nextArr.map((card) => (
+  const cards = shuffle(arraySeq.current).map((card) => (
     <button
       key={card}
       onClick={checkCardClick}
@@ -54,5 +89,7 @@ function Cards() {
       {card}
     </button>
   ))
+  console.log('card created')
+
   return <>{cards}</>
 }
