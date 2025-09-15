@@ -11,21 +11,32 @@ export default function StartingUI() {
     setScore((score) => score + 1)
   }
 
+  function activateGameLoss() {
+    setGameWin(false)
+    setGamePlaying(false)
+  }
+
+  function activateGameWin() {
+    setGameWin(true)
+    setGamePlaying(false)
+  }
+
   useEffect(() => {
     if (score === 6) {
-      setGameWin(true)
-      setGamePlaying(false)
+      activateGameWin()
     }
   })
 
   return (
     <>
       {gameWin && <WinAlert />}
+      {gameWin === false && <LossAlert />}
       <ScoreUI score={score} />
       <Cards
         score={score}
         handleScore={handleScore}
         gamePlaying={gamePlaying}
+        activateGameLoss={activateGameLoss}
       />
     </>
   )
@@ -34,8 +45,17 @@ export default function StartingUI() {
 function WinAlert() {
   console.log('winAlert')
   return (
-    <div>
+    <div className="winAlert">
       <div>You Win!</div>
+    </div>
+  )
+}
+
+function LossAlert() {
+  console.log('lossAlert')
+  return (
+    <div className="lossAlert">
+      <div>GAME OVER</div>
     </div>
   )
 }
@@ -45,7 +65,7 @@ function ScoreUI({ score }) {
   return <div>Score: {score}</div>
 }
 
-function Cards({ score, handleScore, gamePlaying }) {
+function Cards({ score, handleScore, gamePlaying, activateGameLoss }) {
   const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
   const [correctCard, setCorrectCard] = useState('zip')
 
@@ -62,7 +82,7 @@ function Cards({ score, handleScore, gamePlaying }) {
 
   function checkCardClick(e) {
     if (e.target.classList.contains('false')) {
-      alert('Game Over')
+      activateGameLoss()
     } else {
       handleScore()
       createNextCards()
@@ -93,6 +113,7 @@ function Cards({ score, handleScore, gamePlaying }) {
     <button
       key={card}
       onClick={checkCardClick}
+      disabled={!gamePlaying}
       className={`${card} ${card === correctCard ? 'true' : 'false'}`}
     >
       {card}
