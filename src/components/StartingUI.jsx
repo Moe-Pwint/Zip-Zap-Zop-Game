@@ -31,14 +31,27 @@ export default function StartingUI() {
     <>
       {gameWin && <WinAlert />}
       {gameWin === false && <LossAlert />}
-      <ScoreUI score={score} />
-      <Cards
-        score={score}
-        handleScore={handleScore}
-        gamePlaying={gamePlaying}
-        activateGameLoss={activateGameLoss}
-      />
+      <div className="topContainer">
+        <MenuUI />
+        <ScoreUI score={score} />
+      </div>
+      <div className="cardsContainer">
+        <Cards
+          score={score}
+          handleScore={handleScore}
+          gamePlaying={gamePlaying}
+          activateGameLoss={activateGameLoss}
+        />
+      </div>
     </>
+  )
+}
+
+function MenuUI() {
+  return (
+    <div className="menuContainer">
+      <button className="menuBtn">Menu</button>
+    </div>
   )
 }
 
@@ -62,7 +75,11 @@ function LossAlert() {
 
 function ScoreUI({ score }) {
   console.log('score updated')
-  return <div>Score: {score}</div>
+  return (
+    <div className="scoreContainer">
+      <div>Score: {score}</div>
+    </div>
+  )
 }
 
 function Cards({ score, handleScore, gamePlaying, activateGameLoss }) {
@@ -114,9 +131,9 @@ function Cards({ score, handleScore, gamePlaying, activateGameLoss }) {
       key={card}
       onClick={checkCardClick}
       disabled={!gamePlaying}
-      className={`${card} ${card === correctCard ? 'true' : 'false'}`}
+      className={`card ${card} ${card === correctCard ? 'true' : 'false'}`}
     >
-      {card}
+      <p>{card}</p>
     </button>
   ))
   console.log('card created')
