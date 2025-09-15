@@ -6,7 +6,7 @@ import './StartingUI.css'
 export default function StartingUI() {
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
-
+  const [gamePlaying, setGamePlaying] = useState(true)
   function handleScore() {
     setScore((score) => score + 1)
   }
@@ -14,6 +14,7 @@ export default function StartingUI() {
   useEffect(() => {
     if (score === 6) {
       setGameWin(true)
+      setGamePlaying(false)
     }
   })
 
@@ -21,7 +22,11 @@ export default function StartingUI() {
     <>
       {gameWin && <WinAlert />}
       <ScoreUI score={score} />
-      <Cards score={score} handleScore={handleScore} />
+      <Cards
+        score={score}
+        handleScore={handleScore}
+        gamePlaying={gamePlaying}
+      />
     </>
   )
 }
@@ -40,19 +45,19 @@ function ScoreUI({ score }) {
   return <div>Score: {score}</div>
 }
 
-function Cards({ score, handleScore }) {
-  const arraySeq = useRef(['zip', 'zap', 'zop'])
+function Cards({ score, handleScore, gamePlaying }) {
+  const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
   const [correctCard, setCorrectCard] = useState('zip')
 
   function shuffle(array) {
-    const arrayCopy = [...array]
-    for (let i = arrayCopy.length - 1; i > 0; i--) {
+    const arrCopy = [...array]
+    for (let i = arrCopy.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1))
-      let k = arrayCopy[i]
-      arrayCopy[i] = arrayCopy[j]
-      arrayCopy[j] = k
+      let k = arrCopy[i]
+      arrCopy[i] = arrCopy[j]
+      arrCopy[j] = k
     }
-    return arrayCopy
+    return arrCopy
   }
 
   function checkCardClick(e) {
@@ -65,8 +70,12 @@ function Cards({ score, handleScore }) {
   }
 
   function createNextCards() {
-    if (score !== 6) {
+    if (score < 5 && gamePlaying === true) {
       assignCorrectCard()
+      const nextArr = shuffle(arraySeq.current)
+      arraySeq.current = nextArr
+      console.log(score)
+      console.log(arraySeq.current)
     }
   }
 
@@ -80,7 +89,7 @@ function Cards({ score, handleScore }) {
     }
   }
 
-  const cards = shuffle(arraySeq.current).map((card) => (
+  const cards = arraySeq.current.map((card) => (
     <button
       key={card}
       onClick={checkCardClick}
