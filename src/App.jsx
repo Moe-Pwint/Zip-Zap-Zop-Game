@@ -5,11 +5,7 @@ import StartingUI from './components/StartingUI.jsx'
 import './components/StartingUI.css'
 
 function App() {
-  return (
-    <div className="cardsContainer">
-      <StartingUI />
-    </div>
-  )
+  return <StartingUI />
 }
 
 export default App

@@ -23,8 +23,11 @@ body {
 .scoreContainer {
   /* margin-left: auto; */
   width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
   border: 1px solid black;
-  padding-left: 1em;
   border-radius: 5px;
 }
 
@@ -41,7 +44,7 @@ body {
   }
 }
 
-.roundTimeContainer {
+/* .roundTimeContainer {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -51,7 +54,7 @@ body {
   p {
     margin: auto;
   }
-}
+} */
 
 .cardsContainer {
   font-size: 40px;
