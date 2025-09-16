@@ -6,7 +6,7 @@ import InfoTopDisplay from './InfoTopDisplay'
 import WinLoseAlert from './WinLoseAlert'
 
 export default function StartingUI() {
-  const winningScore = useRef(20)
+  const winningScore = useRef(6)
   const totalTime = useRef(60)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
@@ -38,6 +38,7 @@ export default function StartingUI() {
         totalTime={totalTime.current}
         score={score}
         gamePlaying={gamePlaying}
+        gameWin={gameWin}
       />
       <CardsUI
         winningScore={winningScore.current}
