@@ -3,28 +3,30 @@ import React, { useEffect } from 'react'
 import { useState, memo } from 'react'
 import './StartingUI.css'
 
-export default function InfoTopDisplay({ score }) {
+export default function InfoTopDisplay({ totalTime, score, gamePlaying }) {
   return (
     <div className="topContainer">
       <MenuUI />
-      <TimeUI />
+      <TimeUI totalTime={totalTime} gamePlaying={gamePlaying} />
       <ScoreUI score={score} />
     </div>
   )
 }
 
-const TimeUI = memo(function TimeUI() {
-  const [timer, setTimer] = useState(90)
+const TimeUI = memo(function TimeUI({ totalTime, gamePlaying }) {
+  const [timer, setTimer] = useState(totalTime)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer(() => timer - 1)
-    }, [1000])
+    if (gamePlaying && timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(() => timer - 1)
+      }, [1000])
 
-    return () => {
-      clearInterval(interval)
+      return () => {
+        clearInterval(interval)
+      }
     }
-  }, [timer])
+  }, [gamePlaying, timer])
 
   return (
     <div className="gameTimeContainer">

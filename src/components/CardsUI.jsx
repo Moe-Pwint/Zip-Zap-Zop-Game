@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import './StartingUI.css'
 
 export default function CardsUI({
+  winningScore,
   score,
   handleScore,
   gamePlaying,
@@ -12,6 +13,7 @@ export default function CardsUI({
   return (
     <div className="cardsContainer">
       <Cards
+        winningScore={winningScore}
         score={score}
         handleScore={handleScore}
         gamePlaying={gamePlaying}
@@ -21,7 +23,13 @@ export default function CardsUI({
   )
 }
 
-function Cards({ score, handleScore, gamePlaying, activateGameLoss }) {
+function Cards({
+  winningScore,
+  score,
+  handleScore,
+  gamePlaying,
+  activateGameLoss,
+}) {
   const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
   const [correctCard, setCorrectCard] = useState('zip')
 
@@ -46,7 +54,7 @@ function Cards({ score, handleScore, gamePlaying, activateGameLoss }) {
   }
 
   function createNextCards() {
-    if (score < 5 && gamePlaying === true) {
+    if (score < winningScore - 1 && gamePlaying === true) {
       assignCorrectCard()
       const nextArr = shuffle(arraySeq.current)
       arraySeq.current = nextArr

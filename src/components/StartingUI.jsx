@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './StartingUI.css'
 import CardsUI from './CardsUI'
-import InfoTopDisplay from './infoTopDisplay'
+import InfoTopDisplay from './InfoTopDisplay'
 import WinLoseAlert from './WinLoseAlert'
 
 export default function StartingUI() {
+  const winningScore = useRef(20)
+  const totalTime = useRef(60)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(true)
@@ -25,7 +26,7 @@ export default function StartingUI() {
   }
 
   useEffect(() => {
-    if (score === 6) {
+    if (score === winningScore.current) {
       activateGameWin()
     }
   })
@@ -33,8 +34,13 @@ export default function StartingUI() {
   return (
     <>
       <WinLoseAlert gameWin={gameWin} />
-      <InfoTopDisplay score={score} />
+      <InfoTopDisplay
+        totalTime={totalTime.current}
+        score={score}
+        gamePlaying={gamePlaying}
+      />
       <CardsUI
+        winningScore={winningScore.current}
         score={score}
         handleScore={handleScore}
         gamePlaying={gamePlaying}
