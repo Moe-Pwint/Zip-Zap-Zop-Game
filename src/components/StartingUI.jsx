@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './StartingUI.css'
 import CardsUI from './CardsUI'
 import InfoTopDisplay from './infoTopDisplay'
+import WinLoseAlert from './WinLoseAlert'
 
 export default function StartingUI() {
   const [score, setScore] = useState(0)
@@ -31,8 +32,7 @@ export default function StartingUI() {
 
   return (
     <>
-      {gameWin && <WinAlert />}
-      {gameWin === false && <LossAlert />}
+      <WinLoseAlert gameWin={gameWin} />
       <InfoTopDisplay score={score} />
       <CardsUI
         score={score}
@@ -41,23 +41,5 @@ export default function StartingUI() {
         activateGameLoss={activateGameLoss}
       />
     </>
-  )
-}
-
-function WinAlert() {
-  console.log('winAlert')
-  return (
-    <div className="winAlert">
-      <div>You Win!</div>
-    </div>
-  )
-}
-
-function LossAlert() {
-  console.log('lossAlert')
-  return (
-    <div className="lossAlert">
-      <div>GAME OVER</div>
-    </div>
   )
 }
