@@ -15,7 +15,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
     1.  Level 1 Btn
         - Level 1 Rules:
           Tap the cards "Zip" "Zap" "Zop" in a row.
-          Gain 20 scores in 60 seconds to win the level.
+          Gain 21 scores in 60 seconds to win the level.
           Replay to beat your own time!
           - Play Level 1 Btn.
 

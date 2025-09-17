@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
-import { useState, memo } from 'react'
+import { useState, useRef, memo } from 'react'
 import './StartingUI.css'
 
 export default function InfoTopDisplay({
@@ -8,37 +8,27 @@ export default function InfoTopDisplay({
   score,
   gamePlaying,
   gameWin,
+  hasNewBestTime,
 }) {
-  const savedBestTime = () => {
-    if (localStorage.getItem('bestTime') === null) {
-      localStorage.setItem('bestTime', totalTime)
-      return localStorage.getItem('bestTime')
-    } else {
-      return localStorage.getItem('bestTime')
-    }
+  if (localStorage.getItem('bestTime') === null) {
+    localStorage.setItem('bestTime', totalTime)
   }
-  const [bestTime, setBestTime] = useState(savedBestTime)
-
-  function updateBestTime(newTime) {
-    if (newTime < bestTime) {
-      setBestTime(newTime)
-      localStorage.setItem('bestTime', newTime)
-    }
-  }
+  const bestTime = useRef(localStorage.getItem('bestTime'))
 
   return (
     <>
       <div className="topContainer">
         <MenuUI />
         <TimeUI
-          updateBestTime={updateBestTime}
+          bestTime={bestTime.current}
           totalTime={totalTime}
           gamePlaying={gamePlaying}
           gameWin={gameWin}
+          hasNewBestTime={hasNewBestTime}
         />
         <ScoreUI score={score} />
       </div>
-      <BestTimeUI bestTime={bestTime} />
+      <BestTimeUI bestTime={bestTime.current} />
     </>
   )
 }
@@ -52,10 +42,11 @@ const MenuUI = memo(function MenuUI() {
 })
 
 const TimeUI = memo(function TimeUI({
-  updateBestTime,
+  bestTime,
   totalTime,
   gamePlaying,
   gameWin,
+  hasNewBestTime,
 }) {
   const [timer, setTimer] = useState(0)
 
@@ -71,9 +62,16 @@ const TimeUI = memo(function TimeUI({
     }
   }, [gamePlaying, timer])
 
+  function updateNewTime() {
+    if (timer < bestTime) {
+      localStorage.setItem('bestTime', timer)
+      hasNewBestTime()
+    }
+  }
+
   useEffect(() => {
     if (gamePlaying === false && gameWin) {
-      updateBestTime(timer)
+      updateNewTime()
     }
   })
 

@@ -130,6 +130,10 @@ body {
   align-items: center;
   border-radius: 8px;
   gap: 40px;
+  p.newBestTime {
+    font-size: 40px;
+    margin: 0;
+  }
 
   p {
     font-size: 30px;
