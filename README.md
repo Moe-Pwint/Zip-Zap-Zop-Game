@@ -7,21 +7,21 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
   - Logo Screen (for loading)
 
   - About Game Button
-    1. Tap the cards "Zip", "Zap", "Zop" in a row quickly without making a mistake.
+    1. Tap the cards "Zip", "Zap", "Zop" in a row.
     2. Replay to beat your own records!
     3. During each tap, the cards will randomly switch places.
     4. Each level has different rules.
   - Select Level Button (Each level )
     1.  Level 1 Btn
         - Level 1 Rules:
-          Tap the cards "Zip" "Zap" "Zop" in a row without making a mistake.
+          Tap the cards "Zip" "Zap" "Zop" in a row.
           Gain 20 scores in 60 seconds to win the level.
-          Beat your own time!
+          Replay to beat your own time!
           - Play Level 1 Btn.
 
     2.  Level 2 Btn
         - Level 2 Rules:
-          Tap the cards "Zip" "Zap" "Zop" in a row without making a mistake.
+          Tap the cards "Zip" "Zap" "Zop" in a row.
           Time limit for each tap: 2 seconds
           Gain minimum 30 scores in 60 seconds to win the level.
           Beat your own score!
@@ -29,7 +29,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
 
     3.  Level 3 Btn
         - Level 3 Rules:
-          Tap the cards "Zip" "Zap" "Zop" in a row without making a mistake.
+          Tap the cards "Zip" "Zap" "Zop" in a row.
           Time limit for each tap: 2 seconds
           Gain minimum 30 scores in 60 seconds to win the level.
           Beat your own score!
@@ -38,7 +38,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
 
     4.  Level 4 Btn
         - Level 4 Rules:
-          Tap the cards "Zip" "Zap" "Zop" in a row without making a mistake.
+          Tap the cards "Zip" "Zap" "Zop" in a row.
           Time limit for each tap: 1 seconds
           Gain minimum 30 scores in 30 seconds to win the level.
           Beat your own score!
@@ -47,7 +47,7 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
     5.  Level 5 Btn
         - Level 5 Rules:
         - Level 4 Rules:
-          Reverse pattern: Tap the cards "Zop" "Zap" "Zip" in a row without making a mistake.
+          Reverse pattern: Tap the cards "Zop" "Zap" "Zip" in a row.
           Time limit for each tap: 1 seconds
           Gain minimum 30 scores in 30 seconds to win the level.
           Beat your own score!
@@ -66,7 +66,10 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
   6. timer countdown
   7. cards
 
-- Game Functions for level 0
+- Win/Lose Functions for level 1
+  - Win: Gain enough score before time out
+  - Lose: Not gain enough score before time out
+  - Lose: Click wrong card.
 
 - Profile
   - Stats Section
