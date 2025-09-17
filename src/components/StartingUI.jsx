@@ -5,6 +5,8 @@ import CardsUI from './CardsUI'
 import InfoTopDisplay from './InfoTopDisplay'
 import WinLoseAlert from './WinLoseAlert'
 
+// localStorage.clear()
+
 export default function StartingUI() {
   const winningScore = useRef(3)
   const totalTime = useRef(3)
@@ -17,13 +19,13 @@ export default function StartingUI() {
   }
 
   function activateGameLoss() {
-    setGameWin(false)
     setGamePlaying(false)
+    setTimeout(() => setGameWin(false), 1000)
   }
 
   function activateGameWin() {
-    setGameWin(true)
     setGamePlaying(false)
+    setTimeout(() => setGameWin(true), 1000)
   }
 
   useEffect(() => {
