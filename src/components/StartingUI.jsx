@@ -7,10 +7,11 @@ import WinLoseAlert from './WinLoseAlert'
 
 export default function StartingUI() {
   const winningScore = useRef(3)
-  const totalTime = useRef(10)
+  const totalTime = useRef(3)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(true)
+
   function handleScore() {
     setScore((score) => score + 1)
   }
@@ -28,6 +29,17 @@ export default function StartingUI() {
   useEffect(() => {
     if (score === winningScore.current) {
       activateGameWin()
+    }
+  })
+
+  useEffect(() => {
+    if (gamePlaying) {
+      const timeOutId = setTimeout(() => {
+        activateGameLoss()
+      }, [(totalTime.current + 1) * 1000])
+      return () => {
+        clearTimeout(timeOutId)
+      }
     }
   })
 
