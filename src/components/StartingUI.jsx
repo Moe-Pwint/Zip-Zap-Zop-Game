@@ -12,7 +12,11 @@ export default function StartingUI() {
   const totalTime = useRef(3)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
-  const [gamePlaying, setGamePlaying] = useState(true)
+  const [gamePlaying, setGamePlaying] = useState(null)
+
+  function beginGame() {
+    setGamePlaying(true)
+  }
 
   function handleScore() {
     setScore((score) => score + 1)
@@ -20,12 +24,12 @@ export default function StartingUI() {
 
   function activateGameLoss() {
     setGamePlaying(false)
-    setTimeout(() => setGameWin(false), 1000)
+    setTimeout(() => setGameWin(false), 500)
   }
 
   function activateGameWin() {
     setGamePlaying(false)
-    setTimeout(() => setGameWin(true), 1000)
+    setTimeout(() => setGameWin(true), 500)
   }
 
   useEffect(() => {
@@ -45,22 +49,38 @@ export default function StartingUI() {
     }
   })
 
+  if (gamePlaying === null) {
+    return <GameInfoUI beginGame={beginGame} />
+  } else {
+    return (
+      <>
+        <WinLoseAlert gameWin={gameWin} />
+        <InfoTopDisplay
+          totalTime={totalTime.current}
+          score={score}
+          gamePlaying={gamePlaying}
+          gameWin={gameWin}
+        />
+        <CardsUI
+          winningScore={winningScore.current}
+          score={score}
+          handleScore={handleScore}
+          gamePlaying={gamePlaying}
+          activateGameLoss={activateGameLoss}
+        />
+      </>
+    )
+  }
+}
+
+function GameInfoUI({ beginGame }) {
   return (
-    <>
-      <WinLoseAlert gameWin={gameWin} />
-      <InfoTopDisplay
-        totalTime={totalTime.current}
-        score={score}
-        gamePlaying={gamePlaying}
-        gameWin={gameWin}
-      />
-      <CardsUI
-        winningScore={winningScore.current}
-        score={score}
-        handleScore={handleScore}
-        gamePlaying={gamePlaying}
-        activateGameLoss={activateGameLoss}
-      />
-    </>
+    <div className="gameInfoContainer">
+      <p>Time: 60 seconds</p>
+      <p>Tap the cards &quot;Zip, Zap, Zop&quot; in a row.</p>
+      <p>Gain 20 scores to win level.</p>
+
+      <button onClick={beginGame}>Play Game</button>
+    </div>
   )
 }
