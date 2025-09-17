@@ -122,8 +122,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--mid-purple);
-  padding: 60px 120px;
-  font-size: 70px;
+  padding: 30px 100px;
+  font-size: 60px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -133,11 +133,12 @@ body {
 
   p {
     font-size: 30px;
+    text-align: center;
   }
 }
 
 .playAgnBtn {
-  font-size: 40px;
+  font-size: 30px;
   display: block;
   margin: auto;
 }

@@ -8,7 +8,7 @@ export default function CardsUI({
   score,
   handleScore,
   gamePlaying,
-  activateGameLoss,
+  handleWrongCardLoss,
 }) {
   return (
     <div className="cardsContainer">
@@ -17,7 +17,7 @@ export default function CardsUI({
         score={score}
         handleScore={handleScore}
         gamePlaying={gamePlaying}
-        activateGameLoss={activateGameLoss}
+        handleWrongCardLoss={handleWrongCardLoss}
       />
     </div>
   )
@@ -28,7 +28,7 @@ function Cards({
   score,
   handleScore,
   gamePlaying,
-  activateGameLoss,
+  handleWrongCardLoss,
 }) {
   const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
   const [correctCard, setCorrectCard] = useState('zip')
@@ -46,7 +46,7 @@ function Cards({
 
   function checkCardClick(e) {
     if (e.target.classList.contains('false')) {
-      activateGameLoss()
+      handleWrongCardLoss()
     } else {
       handleScore()
       createNextCards()

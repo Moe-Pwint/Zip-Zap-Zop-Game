@@ -13,6 +13,13 @@ export default function StartingUI() {
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(null)
+  const [timeOutLoss, setTimeOutLoss] = useState(null)
+  const [wrongCardLoss, setWrongCardLoss] = useState(null)
+
+  function handleWrongCardLoss() {
+    setWrongCardLoss(true)
+    activateGameLoss()
+  }
 
   function beginGame() {
     setGamePlaying(true)
@@ -41,6 +48,7 @@ export default function StartingUI() {
   useEffect(() => {
     if (gamePlaying) {
       const timeOutId = setTimeout(() => {
+        setTimeOutLoss(true)
         activateGameLoss()
       }, [(totalTime.current + 1) * 1000])
       return () => {
@@ -54,7 +62,11 @@ export default function StartingUI() {
   } else {
     return (
       <>
-        <WinLoseAlert gameWin={gameWin} />
+        <WinLoseAlert
+          gameWin={gameWin}
+          timeOutLoss={timeOutLoss}
+          wrongCardLoss={wrongCardLoss}
+        />
         <InfoTopDisplay
           totalTime={totalTime.current}
           score={score}
@@ -66,7 +78,7 @@ export default function StartingUI() {
           score={score}
           handleScore={handleScore}
           gamePlaying={gamePlaying}
-          activateGameLoss={activateGameLoss}
+          handleWrongCardLoss={handleWrongCardLoss}
         />
       </>
     )
