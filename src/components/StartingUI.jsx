@@ -6,8 +6,8 @@ import InfoTopDisplay from './InfoTopDisplay'
 import WinLoseAlert from './WinLoseAlert'
 
 export default function StartingUI() {
-  const winningScore = useRef(6)
-  const totalTime = useRef(60)
+  const winningScore = useRef(3)
+  const totalTime = useRef(10)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(true)
