@@ -1,9 +1,11 @@
+// import { useEffect, useState } from 'react'
 import React from 'react'
 import './App.css'
-import LevelZ from './components/levelZ'
+import StartingUI from './components/StartingUI.jsx'
+import './components/StartingUI.css'
 
 function App() {
-  return <LevelZ />
+  return <StartingUI />
 }
 
 export default App
