@@ -8,7 +8,7 @@ import WinLoseAlert from './WinLoseAlert'
 // localStorage.clear()
 
 export default function StartingUI() {
-  const winningScore = useRef(21)
+  const winningScore = useRef(3)
   const totalTime = useRef(60)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
@@ -36,12 +36,12 @@ export default function StartingUI() {
 
   function activateGameLoss() {
     setGamePlaying(false)
-    setTimeout(() => setGameWin(false), 500)
+    setGameWin(false)
   }
 
   function activateGameWin() {
     setGamePlaying(false)
-    setTimeout(() => setGameWin(true), 500)
+    setGameWin(true)
   }
 
   useEffect(() => {
@@ -62,34 +62,31 @@ export default function StartingUI() {
     }
   })
 
-  if (gamePlaying === null) {
-    return <GameInfoUI beginGame={beginGame} />
-  } else {
-    return (
-      <>
-        <WinLoseAlert
-          gameWin={gameWin}
-          timeOutLoss={timeOutLoss}
-          wrongCardLoss={wrongCardLoss}
-          newBestTime={newBestTime}
-        />
-        <InfoTopDisplay
-          totalTime={totalTime.current}
-          score={score}
-          gamePlaying={gamePlaying}
-          gameWin={gameWin}
-          hasNewBestTime={hasNewBestTime}
-        />
-        <CardsUI
-          winningScore={winningScore.current}
-          score={score}
-          handleScore={handleScore}
-          gamePlaying={gamePlaying}
-          handleWrongCardLoss={handleWrongCardLoss}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      {gamePlaying === null && <GameInfoUI beginGame={beginGame} />}
+      <WinLoseAlert
+        gameWin={gameWin}
+        timeOutLoss={timeOutLoss}
+        wrongCardLoss={wrongCardLoss}
+        newBestTime={newBestTime}
+      />
+      <InfoTopDisplay
+        totalTime={totalTime.current}
+        score={score}
+        gamePlaying={gamePlaying}
+        gameWin={gameWin}
+        hasNewBestTime={hasNewBestTime}
+      />
+      <CardsUI
+        winningScore={winningScore.current}
+        score={score}
+        handleScore={handleScore}
+        gamePlaying={gamePlaying}
+        handleWrongCardLoss={handleWrongCardLoss}
+      />
+    </>
+  )
 }
 
 function GameInfoUI({ beginGame }) {

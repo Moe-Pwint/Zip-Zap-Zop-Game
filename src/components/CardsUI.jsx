@@ -10,20 +10,43 @@ export default function CardsUI({
   gamePlaying,
   handleWrongCardLoss,
 }) {
-  return (
-    <div className="cardsContainer">
-      <Cards
-        winningScore={winningScore}
-        score={score}
-        handleScore={handleScore}
-        gamePlaying={gamePlaying}
-        handleWrongCardLoss={handleWrongCardLoss}
-      />
-    </div>
-  )
+  const [correctCard, setCorrectCard] = useState('zip')
+
+  function assignCorrectCard() {
+    if (correctCard === 'zip') {
+      setCorrectCard('zap')
+    } else if (correctCard === 'zap') {
+      setCorrectCard('zop')
+    } else if (correctCard === 'zop') {
+      setCorrectCard('zip')
+    }
+  }
+
+  if (gamePlaying !== null) {
+    return (
+      <>
+        <div className="clueContainer">
+          <p>{correctCard.toUpperCase()}</p>
+        </div>
+        <div className="cardsContainer">
+          <Cards
+            correctCard={correctCard}
+            assignCorrectCard={assignCorrectCard}
+            winningScore={winningScore}
+            score={score}
+            handleScore={handleScore}
+            gamePlaying={gamePlaying}
+            handleWrongCardLoss={handleWrongCardLoss}
+          />
+        </div>
+      </>
+    )
+  }
 }
 
 function Cards({
+  correctCard,
+  assignCorrectCard,
   winningScore,
   score,
   handleScore,
@@ -31,7 +54,6 @@ function Cards({
   handleWrongCardLoss,
 }) {
   const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
-  const [correctCard, setCorrectCard] = useState('zip')
 
   function shuffle(array) {
     const arrCopy = [...array]
@@ -46,6 +68,7 @@ function Cards({
 
   function checkCardClick(e) {
     if (e.target.classList.contains('false')) {
+      e.target.classList.add('wrongCard')
       handleWrongCardLoss()
     } else {
       handleScore()
@@ -60,16 +83,6 @@ function Cards({
       arraySeq.current = nextArr
       console.log(score)
       console.log(arraySeq.current)
-    }
-  }
-
-  function assignCorrectCard() {
-    if (correctCard === 'zip') {
-      setCorrectCard('zap')
-    } else if (correctCard === 'zap') {
-      setCorrectCard('zop')
-    } else if (correctCard === 'zop') {
-      setCorrectCard('zip')
     }
   }
 

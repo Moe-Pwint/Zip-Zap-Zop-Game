@@ -78,9 +78,10 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
 
 TASKS:
 
-Change card texts to Capitalized.
-Create Next Card Clue on top
-Show effect when a card is clicked
+Show topContainer before game start.
+Create Next Card Clue on top.
+Highlight if wrong card is clicked.
+Show effect when a card is clicked.
 Show refresh effect when new cards are generated.
 Create helper functions and take out functions.
 
