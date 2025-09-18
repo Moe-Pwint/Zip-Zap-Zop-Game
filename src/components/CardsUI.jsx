@@ -80,7 +80,7 @@ function Cards({
       disabled={!gamePlaying}
       className={`card ${card} ${card === correctCard ? 'true' : 'false'}`}
     >
-      <p>{card}</p>
+      <p>{card.toUpperCase()}</p>
     </button>
   ))
   console.log('card created')

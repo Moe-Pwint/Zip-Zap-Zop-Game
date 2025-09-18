@@ -112,6 +112,7 @@ body {
   display: flex;
   p {
     margin: auto;
+    font-size: 50px;
   }
 }
 

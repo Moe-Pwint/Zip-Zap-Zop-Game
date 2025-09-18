@@ -75,3 +75,13 @@ Each Level Btn has Icons next to them. First Icon showing time limit. Subsequent
   - Stats Section
     - Fastest recorded tapping time: (eg.)0.1 second (announce at the end of level if record is beaten)
     - Stats for each level (highest score, longest time played)
+
+TASKS:
+
+Change card texts to Capitalized.
+Create Next Card Clue on top
+Show effect when a card is clicked
+Show refresh effect when new cards are generated.
+Create helper functions and take out functions.
+
+New Level - Use API to generate cards
