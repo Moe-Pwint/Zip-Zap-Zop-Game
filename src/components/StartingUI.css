@@ -119,12 +119,17 @@ body {
   margin: 1em;
 }
 
+.card.true:active {
+  border: 5px solid rgb(1, 230, 1);
+}
+
 .card {
-  border: 4px solid var(--mid-yellow);
+  border: 1px solid gray;
   border-radius: 10px;
   width: 200px;
   height: 300px;
   display: flex;
+
   p {
     margin: auto;
     font-size: 50px;
@@ -135,9 +140,9 @@ body {
   border: 3px solid red;
 }
 
-/* div[data-right-card='rightCard'] {
+.rightCard {
   border: 3px solid green;
-} */
+}
 
 .winAlert,
 .lossAlert {

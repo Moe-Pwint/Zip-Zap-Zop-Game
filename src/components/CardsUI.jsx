@@ -71,6 +71,7 @@ function Cards({
       e.target.classList.add('wrongCard')
       handleWrongCardLoss()
     } else {
+      // e.target.classList.add('rightCard')
       handleScore()
       createNextCards()
     }

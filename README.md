@@ -82,7 +82,8 @@ Show topContainer before game start.
 Create Next Card Clue on top.
 Highlight if wrong card is clicked.
 Show effect when a card is clicked.
-Show refresh effect when new cards are generated.
 Create helper functions and take out functions.
+
+<!-- Show refresh effect when new cards are generated. -->
 
 New Level - Use API to generate cards

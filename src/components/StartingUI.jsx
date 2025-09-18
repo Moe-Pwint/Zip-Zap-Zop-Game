@@ -8,23 +8,14 @@ import WinLoseAlert from './WinLoseAlert'
 // localStorage.clear()
 
 export default function StartingUI() {
-  const winningScore = useRef(3)
+  const winningScore = useRef(21)
   const totalTime = useRef(60)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(null)
   const [timeOutLoss, setTimeOutLoss] = useState(null)
   const [wrongCardLoss, setWrongCardLoss] = useState(null)
-  const [newBestTime, setHasBestTime] = useState(null)
-
-  function handleWrongCardLoss() {
-    setWrongCardLoss(true)
-    activateGameLoss()
-  }
-
-  function hasNewBestTime() {
-    setHasBestTime(true)
-  }
+  const [newBestTime, setHasNewBestTime] = useState(null)
 
   function beginGame() {
     setGamePlaying(true)
@@ -32,6 +23,11 @@ export default function StartingUI() {
 
   function handleScore() {
     setScore((score) => score + 1)
+  }
+
+  function handleWrongCardLoss() {
+    setWrongCardLoss(true)
+    activateGameLoss()
   }
 
   function activateGameLoss() {
@@ -42,6 +38,10 @@ export default function StartingUI() {
   function activateGameWin() {
     setGamePlaying(false)
     setGameWin(true)
+  }
+
+  function hasNewBestTime() {
+    setHasNewBestTime(true)
   }
 
   useEffect(() => {
