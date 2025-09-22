@@ -16,6 +16,7 @@ export default function StartingUI() {
   const [timeOutLoss, setTimeOutLoss] = useState(null)
   const [wrongCardLoss, setWrongCardLoss] = useState(null)
   const [newBestTime, setHasNewBestTime] = useState(null)
+  const gameTimer = useRef(null)
 
   function beginGame() {
     setGamePlaying(true)
@@ -52,13 +53,13 @@ export default function StartingUI() {
 
   useEffect(() => {
     if (gamePlaying) {
-      const timeOutId = setTimeout(() => {
+      gameTimer.current = setTimeout(() => {
         setTimeOutLoss(true)
         activateGameLoss()
       }, [(totalTime.current + 1) * 1000])
-      return () => {
-        clearTimeout(timeOutId)
-      }
+    }
+    return () => {
+      clearTimeout(gameTimer.current)
     }
   })
 

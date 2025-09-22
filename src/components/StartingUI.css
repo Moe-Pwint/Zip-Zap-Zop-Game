@@ -112,6 +112,10 @@ body {
   }
 }
 
+button:disabled {
+  pointer-events: none;
+}
+
 .cardsContainer {
   font-size: 40px;
   display: flex;
