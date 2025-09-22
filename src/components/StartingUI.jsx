@@ -52,13 +52,10 @@ export default function StartingUI() {
 
   useEffect(() => {
     if (gamePlaying) {
-      const timeOutId = setTimeout(() => {
+      setTimeout(() => {
         setTimeOutLoss(true)
         activateGameLoss()
       }, [(totalTime.current + 1) * 1000])
-      return () => {
-        clearTimeout(timeOutId)
-      }
     }
   })
 
