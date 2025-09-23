@@ -8,17 +8,18 @@ import WinLoseAlert from './WinLoseAlert'
 // localStorage.clear()
 
 export default function StartingUI() {
-  const winningScore = useRef(21)
-  const totalTime = useRef(60)
+  const winningScore = useRef(9)
+  const totalTime = useRef(10)
   const [score, setScore] = useState(0)
   const [gameWin, setGameWin] = useState(null)
   const [gamePlaying, setGamePlaying] = useState(null)
   const [timeOutLoss, setTimeOutLoss] = useState(null)
   const [wrongCardLoss, setWrongCardLoss] = useState(null)
   const [newBestTime, setHasNewBestTime] = useState(null)
+  const gameTimer = useRef(null)
 
   function beginGame() {
-    setGamePlaying(true)
+    setTimeout(() => setGamePlaying(true), [1000])
   }
 
   function handleScore() {
@@ -52,12 +53,15 @@ export default function StartingUI() {
 
   useEffect(() => {
     if (gamePlaying) {
-      setTimeout(() => {
+      gameTimer.current = setTimeout(() => {
         setTimeOutLoss(true)
         activateGameLoss()
       }, [(totalTime.current + 1) * 1000])
     }
-  })
+    return () => {
+      clearTimeout(gameTimer.current)
+    }
+  }, [gamePlaying])
 
   return (
     <>
@@ -93,7 +97,9 @@ function GameInfoUI({ beginGame }) {
       <p>Tap the cards &quot;Zip, Zap, Zop&quot; in a row.</p>
       <p>Gain 21 scores to win level.</p>
 
-      <button onClick={beginGame}>Play Game</button>
+      <button onClick={beginGame}>
+        <div>Play Game</div>
+      </button>
     </div>
   )
 }

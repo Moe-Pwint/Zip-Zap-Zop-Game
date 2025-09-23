@@ -22,26 +22,24 @@ export default function CardsUI({
     }
   }
 
-  if (gamePlaying !== null) {
-    return (
-      <>
-        <div className="clueContainer">
-          <p>{correctCard.toUpperCase()}</p>
-        </div>
-        <div className="cardsContainer">
-          <Cards
-            correctCard={correctCard}
-            assignCorrectCard={assignCorrectCard}
-            winningScore={winningScore}
-            score={score}
-            handleScore={handleScore}
-            gamePlaying={gamePlaying}
-            handleWrongCardLoss={handleWrongCardLoss}
-          />
-        </div>
-      </>
-    )
-  }
+  return (
+    <>
+      <div className="clueContainer">
+        <p>{correctCard.toUpperCase()}</p>
+      </div>
+      <div className="cardsContainer">
+        <Cards
+          correctCard={correctCard}
+          assignCorrectCard={assignCorrectCard}
+          winningScore={winningScore}
+          score={score}
+          handleScore={handleScore}
+          gamePlaying={gamePlaying}
+          handleWrongCardLoss={handleWrongCardLoss}
+        />
+      </div>
+    </>
+  )
 }
 
 function Cards({
