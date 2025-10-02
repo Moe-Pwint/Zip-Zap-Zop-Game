@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@ body {
   --dark-purple: rgb(49, 49, 133);
   --ultra-light-yellow: rgb(255, 249, 224);
   --bright-yellow: rgb(249, 207, 39);
-  --wheat-yellow: rgb(246, 208, 139);
+  --wheat-yellow: rgb(255, 221, 157);
   --mid-yellow: rgb(225, 180, 0);
 }
 
@@ -72,23 +72,44 @@ button:disabled {
 }
 
 .topContainer {
-  padding-top: 20px;
+  padding: 40px 0px;
   width: 90vw;
   display: flex;
-  align-items: top;
   margin: auto;
-}
-
-.menuContainer {
-  width: 200px;
+  gap: 30px;
 }
 
 .menuBtn {
+  border: 1.5px solid black;
+  width: max-content;
+  display: flex;
+  padding: 5px;
+  border-radius: 5px;
+  img {
+    width: 30px;
+  }
+}
+
+.menuBtn:hover {
   border: 2px solid rgb(10, 71, 139);
+}
+
+.topLeftWrapper {
+  display: flex;
+  gap: 10px;
+  width: inherit;
+}
+
+.topRightWrapper {
+  display: flex;
+  gap: 10px;
+  width: inherit;
 }
 
 .scoreContainer {
   width: 200px;
+  margin-right: auto;
+  margin-top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,12 +118,23 @@ button:disabled {
   border-radius: 5px;
 }
 
-.gameTimeContainer,
-.bestTimeContainer {
-  margin: auto;
-  margin-top: 0;
+.gameTimeContainer {
   width: 200px;
-  height: 70px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  p {
+    margin: auto;
+  }
+}
+
+.bestTimeContainer {
+  margin-left: auto;
+  width: 200px;
+  height: 50px;
   border: 1px solid black;
   border-radius: 5px;
   text-align: center;
@@ -110,10 +142,6 @@ button:disabled {
   p {
     margin: auto;
   }
-}
-
-.bestTimeContainer {
-  margin-top: 1em;
 }
 
 /* .roundTimeContainer {
@@ -129,7 +157,7 @@ button:disabled {
 } */
 
 .clueContainer {
-  width: 180px;
+  width: max-content;
   border: 3px solid var(--dark-purple);
   margin: auto;
   margin-top: 30px;
@@ -181,6 +209,11 @@ button:disabled {
   border: 3px solid green;
 }
 
+.playAgnContainer p {
+  color: var(--wheat-yellow);
+  font-weight: 700;
+}
+
 .winAlert,
 .lossAlert {
   background-color: var(--mid-purple);
@@ -193,6 +226,8 @@ button:disabled {
   border-radius: 8px;
   gap: 40px;
   p.newBestTime {
+    color: var(--wheat-yellow);
+    font-weight: 700;
     font-size: 40px;
     margin: 0;
   }
@@ -252,5 +287,93 @@ button:disabled {
   }
   14% {
     transform: scale(1.05);
+  }
+}
+
+@media (max-width: 600px) {
+  .menuBtn {
+    border: none;
+  }
+  .topContainer {
+    display: block;
+    padding: 20px 0px;
+    div {
+      height: 40px;
+    }
+  }
+  .topRightWrapper {
+    margin-top: 10px;
+  }
+  .scoreContainer {
+    width: max-content;
+    padding: 0px 10px;
+  }
+  .clueContainer {
+    border: 3px solid var(--dark-purple);
+    margin: 10px auto;
+    p {
+      color: var(--dark-purple);
+      padding: 10px 30px;
+      font-size: 30px;
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  .gameInfoContainer {
+    font-size: 20px;
+    width: 90vw;
+    padding: 0.5em;
+    p {
+      margin: 5px;
+      padding-top: 10px;
+      text-align: center;
+    }
+    button {
+      margin: 30px;
+      font-size: 25px;
+    }
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 10px;
+    height: calc(100vh - 270px);
+  }
+
+  .card {
+    width: 70vw;
+    height: auto;
+    flex: 1;
+  }
+
+  .winAlert,
+  .lossAlert {
+    width: 80vw;
+    padding: 30px 20px;
+    font-size: 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    gap: 10px;
+    p.newBestTime {
+      font-size: 30px;
+      margin: 0;
+    }
+
+    p {
+      font-size: 27px;
+      text-align: center;
+    }
+  }
+  .playAgnBtn {
+    font-size: 27px;
+  }
+  .lossAlert {
+    top: 50%;
   }
 }

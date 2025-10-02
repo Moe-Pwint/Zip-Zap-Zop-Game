@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { useState, useRef, memo } from 'react'
 import './StartingUI.css'
+import menu from '../assets/menu.svg'
 
 export default function InfoTopDisplay({
   totalTime,
@@ -18,17 +19,22 @@ export default function InfoTopDisplay({
   return (
     <>
       <div className="topContainer">
-        <MenuUI />
-        <TimeUI
-          bestTime={bestTime.current}
-          totalTime={totalTime}
-          gamePlaying={gamePlaying}
-          gameWin={gameWin}
-          hasNewBestTime={hasNewBestTime}
-        />
-        <ScoreUI score={score} />
+        <div className="topLeftWrapper">
+          <MenuUI />
+          <TimeUI
+            bestTime={bestTime.current}
+            totalTime={totalTime}
+            gamePlaying={gamePlaying}
+            gameWin={gameWin}
+            hasNewBestTime={hasNewBestTime}
+          />
+        </div>
+        <div className="topRightWrapper">
+          <ScoreUI score={score} />
+
+          <BestTimeUI bestTime={bestTime.current} />
+        </div>
       </div>
-      <BestTimeUI bestTime={bestTime.current} />
     </>
   )
 }
@@ -36,7 +42,9 @@ export default function InfoTopDisplay({
 const MenuUI = memo(function MenuUI() {
   return (
     <div className="menuContainer">
-      <button className="menuBtn">Menu</button>
+      <div className="menuBtn">
+        <img src={menu} alt="" />
+      </div>
     </div>
   )
 })
@@ -77,7 +85,7 @@ const TimeUI = memo(function TimeUI({
 
   return (
     <div className="gameTimeContainer">
-      <p>Time Passed: {timer} seconds</p>
+      <p>Time Passed: {timer} secs</p>
     </div>
   )
 })
@@ -86,7 +94,7 @@ const ScoreUI = memo(function ScoreUI({ score }) {
   console.log('score updated')
   return (
     <div className="scoreContainer">
-      <div>Score: {score}</div>
+      <p>Score: {score}</p>
     </div>
   )
 })
@@ -94,7 +102,7 @@ const ScoreUI = memo(function ScoreUI({ score }) {
 const BestTimeUI = memo(function BestTimeUI({ bestTime }) {
   return (
     <div className="bestTimeContainer">
-      <p>Best Time: {bestTime} seconds </p>
+      <p>Best Time: {bestTime} secs </p>
     </div>
   )
 })
