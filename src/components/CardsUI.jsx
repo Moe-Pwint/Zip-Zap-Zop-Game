@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
-import { useRef, useState } from 'react'
+import React, { useMemo } from 'react'
+import { useState } from 'react'
 import './StartingUI.css'
 
 export default function CardsUI({
@@ -51,10 +51,10 @@ function Cards({
   gamePlaying,
   handleWrongCardLoss,
 }) {
-  const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
+  const [arraySeq, setArraySeq] = useState(shuffle(['zip', 'zap', 'zop']))
 
-  function shuffle(array) {
-    const arrCopy = [...array]
+  function shuffle(arraySeq) {
+    const arrCopy = [...arraySeq]
     for (let i = arrCopy.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1))
       let k = arrCopy[i]
@@ -64,12 +64,11 @@ function Cards({
     return arrCopy
   }
 
-  function checkCardClick(e) {
-    if (e.target.classList.contains('false')) {
-      e.target.classList.add('wrongCard')
+  function checkCardClick(card) {
+    if (card !== correctCard) {
+      // e.target.classList.add('wrongCard')
       handleWrongCardLoss()
     } else {
-      // e.target.classList.add('rightCard')
       handleScore()
       createNextCards()
     }
@@ -78,24 +77,26 @@ function Cards({
   function createNextCards() {
     if (score < winningScore - 1 && gamePlaying === true) {
       assignCorrectCard()
-      const nextArr = shuffle(arraySeq.current)
-      arraySeq.current = nextArr
-      console.log(score)
-      console.log(arraySeq.current)
+      setArraySeq((prev) => shuffle(prev))
     }
   }
 
-  const cards = arraySeq.current.map((card) => (
-    <button
-      key={card}
-      onClick={checkCardClick}
-      disabled={!gamePlaying}
-      className={`card ${card} ${card === correctCard ? 'true' : 'false'}`}
-    >
-      <p>{card.toUpperCase()}</p>
-    </button>
-  ))
-  console.log('card created')
+  const cards = useMemo(
+    () =>
+      arraySeq.map((card) => (
+        <button
+          key={card}
+          onClick={() => {
+            checkCardClick(card)
+          }}
+          disabled={!gamePlaying}
+          className={`card ${card}`}
+        >
+          <p>{card.toUpperCase()}</p>
+        </button>
+      )),
+    [correctCard, arraySeq, gamePlaying],
+  )
 
   return <>{cards}</>
 }
