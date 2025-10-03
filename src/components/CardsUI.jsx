@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { useRef, useState } from 'react'
+import { useState, useMemo } from 'react'
 import './StartingUI.css'
 
 export default function CardsUI({
@@ -53,7 +53,7 @@ function Cards({
   gamePlaying,
   handleWrongCardLoss,
 }) {
-  const arraySeq = useRef(shuffle(['zip', 'zap', 'zop']))
+  const [arraySeq, setArraySeq] = useState(shuffle(['zip', 'zap', 'zop']))
 
   function shuffle(array) {
     const arrCopy = [...array]
@@ -66,9 +66,9 @@ function Cards({
     return arrCopy
   }
 
-  function checkCardClick(e) {
-    if (e.target.classList.contains('false')) {
-      e.target.classList.add('wrongCard')
+  function checkCardClick(card) {
+    if (card !== correctCard) {
+      // e.target.classList.add('wrongCard')
       handleWrongCardLoss()
     } else {
       // e.target.classList.add('rightCard')
@@ -80,23 +80,24 @@ function Cards({
   function createNextCards() {
     if (score < winningScore - 1 && gamePlaying === true) {
       assignCorrectCard()
-      const nextArr = shuffle(arraySeq.current)
-      arraySeq.current = nextArr
-      console.log(score)
-      console.log(arraySeq.current)
+      setArraySeq((prev) => shuffle(prev))
     }
   }
 
-  const cards = arraySeq.current.map((card) => (
-    <button
-      key={card}
-      onClick={checkCardClick}
-      disabled={!gamePlaying}
-      className={`card ${card} ${card === correctCard ? 'true' : 'false'}`}
-    >
-      <p>{card.toUpperCase()}</p>
-    </button>
-  ))
+  const cards = useMemo(() =>
+    arraySeq.map((card) => (
+      <button
+        key={card}
+        onClick={() => {
+          checkCardClick(card)
+        }}
+        disabled={!gamePlaying}
+        className={`card ${card}`}
+      >
+        <p>{card.toUpperCase()}</p>
+      </button>
+    )),
+  )
   console.log('card created')
 
   return <>{cards}</>
