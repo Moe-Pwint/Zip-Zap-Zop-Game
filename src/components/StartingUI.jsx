@@ -72,20 +72,22 @@ export default function StartingUI() {
         wrongCardLoss={wrongCardLoss}
         newBestTime={newBestTime}
       />
-      <InfoTopDisplay
-        totalTime={totalTime.current}
-        score={score}
-        gamePlaying={gamePlaying}
-        gameWin={gameWin}
-        hasNewBestTime={hasNewBestTime}
-      />
-      <CardsUI
-        winningScore={winningScore.current}
-        score={score}
-        handleScore={handleScore}
-        gamePlaying={gamePlaying}
-        handleWrongCardLoss={handleWrongCardLoss}
-      />
+      <div className="wrapper">
+        <InfoTopDisplay
+          totalTime={totalTime.current}
+          score={score}
+          gamePlaying={gamePlaying}
+          gameWin={gameWin}
+          hasNewBestTime={hasNewBestTime}
+        />
+        <CardsUI
+          winningScore={winningScore.current}
+          score={score}
+          handleScore={handleScore}
+          gamePlaying={gamePlaying}
+          handleWrongCardLoss={handleWrongCardLoss}
+        />
+      </div>
     </>
   )
 }
